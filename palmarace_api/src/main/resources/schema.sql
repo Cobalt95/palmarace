@@ -8,6 +8,11 @@ CREATE TABLE COUNTRY (
     name VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE PROFILE (
+    profile_code CHAR(3) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE PLACE (
     place_id INT PRIMARY KEY AUTO_INCREMENT,
     country_code CHAR(2) NOT NULL,
@@ -88,11 +93,14 @@ CREATE TABLE ATHLETE (
 	country_code CHAR(2) NOT NULL,
 	bio TEXT,
 	creation_date DATETIME NOT NULL,
+	profile_code CHAR(3) NOT NULL,
 	CONSTRAINT FK_ATHLETE_IMAGE FOREIGN KEY (profile_picture) REFERENCES IMAGE(image_id),
-	CONSTRAINT FK_ATHLETE_COUNTRY FOREIGN KEY (country_code) REFERENCES COUNTRY(country_code)
+	CONSTRAINT FK_ATHLETE_COUNTRY FOREIGN KEY (country_code) REFERENCES COUNTRY(country_code),
+	CONSTRAINT FK_ATHLETE_PROFILE FOREIGN KEY (profile_code) REFERENCES PROFILE(profile_code)
 );
 
 CREATE INDEX IDX_ATHLETE_COUNTRY_CODE ON ATHLETE (country_code);
+CREATE INDEX IDX_ATHLETE_PROFILE_CODE ON ATHLETE (profile_code);
 
 CREATE TABLE CONNECTION (
     connection_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -448,19 +456,6 @@ INSERT INTO TAG (tag_code, name) VALUES
 	('IRC', 'In race'),
 	('FSH', 'Photo finish');
 	
--- Following sample data for development purpose only
-
-INSERT INTO IMAGE (image_id, image_type_code) VALUES
-	(12345, 'PPC');
-	
-INSERT INTO ATHLETE (athlete_id, last_name, first_name, date_birth, email, password, bio, creation_date, profile_picture, country_code) VALUES
-	(1, 
-	'Lebon', 
-	'Philippe', 
-	'1977-03-12', 
-	'philippe.lebon@palmarace.com', 
-	'password', 
-	'Passioné de course et de randonnée en montagne. Rejoins moi dans le Jura !',
-	NOW(),
-	12345,
-	'FR');
+INSERT INTO PROFILE (profile_code, name) VALUES
+	('USR', 'User'),
+	('ADM', 'Admin');

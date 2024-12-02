@@ -5,6 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,19 +27,17 @@ public class AthleteController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@GetMapping("/athlete/{athleteID}")
-	public ResponseEntity<String> sayHi(@PathVariable(value = "athleteID") int athleteId) {
-		Optional<Athlete> optAthlete = athleteService.getById(athleteId);
-		if(optAthlete.isPresent()) {
-			Athlete athlete = optAthlete.get();
-			return ResponseEntity
-					.status(HttpStatus.FOUND)
-					.body("Hi " + athlete.getFirstName() + " " + athlete.getLastName() + ", welcome to Palmarace !");
-		} else {
-			return ResponseEntity
-					.status(HttpStatus.NOT_FOUND)
-					.body("The provided ID does not match any athlete");
-		}
+	@GetMapping("/athlete")
+	public ResponseEntity<String> sayHi() {
+		// Retrieve user from current active session
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		// Retrieve the associated Athlete object
+		// If not found, the exception is handled by com.cobalt.palmarace.config.GlobalExceptionHandler
+		Athlete athlete = athleteService.getByEmail(authentication.getName());
+
+		return ResponseEntity
+				.status(HttpStatus.FOUND)
+				.body("Hi " + athlete.getFirstName() + " " + athlete.getLastName() + ", welcome to Palmarace !");
 	}
 	
 	@PostMapping("/register")

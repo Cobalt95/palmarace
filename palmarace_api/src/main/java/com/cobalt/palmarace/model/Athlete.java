@@ -3,6 +3,8 @@ package com.cobalt.palmarace.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Athlete {
 	private String firstName;
 	private Date dateBirth;
 	private String email;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	private String bio;
 	private Timestamp creationDate;
@@ -34,4 +37,7 @@ public class Athlete {
 	@ManyToOne
 	@JoinColumn(name = "country_code")
 	private Country country;
+	@ManyToOne
+	@JoinColumn(name = "profile_code")
+	private Profile profile;
 }

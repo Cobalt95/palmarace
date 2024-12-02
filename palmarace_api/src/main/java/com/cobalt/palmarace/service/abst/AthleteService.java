@@ -9,5 +9,14 @@ public interface AthleteService {
 
 	public Optional<Athlete> getById(int athleteId);
 	
+	public Athlete getByEmail(String email);
+	
+	
+	/**
+	 * Register a new athlete
+	 * 
+	 * @param athleteDTO - Required data for athlete registration
+	 * @return The athlete object that has just been saved
+	 */
 	public Athlete save(AthleteDTO athleteDTO);
 }
