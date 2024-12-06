@@ -1,23 +1,29 @@
 package com.cobalt.palmarace.controller;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cobalt.palmarace.constant.PalmaraceConstants;
 import com.cobalt.palmarace.model.Athlete;
-import com.cobalt.palmarace.model.dto.AthleteDTO;
+import com.cobalt.palmarace.model.dto.AthleteLoginDTO;
+import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
 import com.cobalt.palmarace.service.abst.AthleteService;
+import com.cobalt.palmarace.service.impl.UserDetailsServiceImpl;
 
 @RestController
 public class AthleteController {
@@ -26,6 +32,8 @@ public class AthleteController {
 	private AthleteService athleteService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private UserDetailsServiceImpl userDetailsService;
 	
 	@GetMapping("/athlete")
 	public ResponseEntity<String> sayHi() {
@@ -41,16 +49,31 @@ public class AthleteController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<String> registerAthlete(@RequestBody AthleteDTO athleteDTO) {
+	public ResponseEntity<String> registerAthlete(@RequestBody AthleteRegisterDTO athleteRegisterDTO) {
 		try {
-			String hashPassword = passwordEncoder.encode(athleteDTO.getPassword());
-			athleteDTO.setPassword(hashPassword);
-			Athlete savedAthlete = athleteService.save(athleteDTO);
+			String hashPassword = passwordEncoder.encode(athleteRegisterDTO.getPassword());
+			athleteRegisterDTO.setPassword(hashPassword);
+			Athlete registeredAthlete = athleteService.registerAthlete(athleteRegisterDTO);
 			
-			if(savedAthlete.getAthleteId() > 0) {
-				return ResponseEntity
-						.status(HttpStatus.CREATED)
-						.body("Athlete successfully registered.");
+			if(registeredAthlete.getAthleteId() > 0) {
+				
+				String jwtToken = userDetailsService.generateJwtToken(registeredAthlete.getEmail(),
+						List.of(new SimpleGrantedAuthority(registeredAthlete
+								.getProfile()
+								.getProfileCode())
+								)
+						.stream()
+						.map(GrantedAuthority::getAuthority)
+						.collect(Collectors.joining(",")));
+				
+				MultiValueMap<String, String> headers = new HttpHeaders();
+				headers.add(PalmaraceConstants.JWT_HEADER, jwtToken);
+				
+				
+				return new ResponseEntity<String>(
+						"Athlete successfully registered.", 
+						headers, 
+						HttpStatus.CREATED);
 			} else {
 				return ResponseEntity
 						.status(HttpStatus.BAD_REQUEST)
@@ -61,5 +84,24 @@ public class AthleteController {
 					.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("An exception occured : " + e.getMessage());
 		}
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<String> loginAthlete(@RequestBody AthleteLoginDTO athleteLoginDTO) {
+		try {
+			String jwtToken = userDetailsService.authenticateAthlete(athleteLoginDTO);
+		
+			MultiValueMap<String, String> headers = new HttpHeaders();
+			headers.add(PalmaraceConstants.JWT_HEADER, jwtToken);
+		
+			return new ResponseEntity<String>("Login successful", headers, HttpStatus.OK);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+		}
+	}
+	
+	@GetMapping("/mustBeAuthenticated")
+	public ResponseEntity<String> mustBeAuthenticated() {
+		return ResponseEntity.status(HttpStatus.OK).body("Authenticated with JWT token");
 	}
 }

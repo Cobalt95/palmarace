@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cobalt.palmarace.model.Athlete;
 import com.cobalt.palmarace.model.Country;
 import com.cobalt.palmarace.model.Profile;
-import com.cobalt.palmarace.model.dto.AthleteDTO;
+import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
 import com.cobalt.palmarace.repository.AthleteDAO;
 import com.cobalt.palmarace.service.abst.AthleteService;
 import com.cobalt.palmarace.service.exc.AthleteNotFoundException;
@@ -31,12 +31,12 @@ public class AthleteServiceImpl implements AthleteService {
 	}
 
 	@Override
-	public Athlete save(AthleteDTO athleteDTO) {
-		Athlete athlete = entityFromDTO(athleteDTO);
+	public Athlete registerAthlete(AthleteRegisterDTO athleteRegisterDTO) {
+		Athlete athlete = entityFromDTO(athleteRegisterDTO);
 		
 		// Country assignment
 		Country country = new Country();
-		country.setCountryCode(athleteDTO.getCountryCode());
+		country.setCountryCode(athleteRegisterDTO.getCountryCode());
 		athlete.setCountry(country);
 		
 		// Profile assignment
@@ -53,17 +53,17 @@ public class AthleteServiceImpl implements AthleteService {
 	/**
 	 * Converts a DTO into a peristable Athlete object
 	 * 
-	 * @param athleteDTO - The DTO to be converted
+	 * @param athleteRegisterDTO - The DTO to be converted
 	 * @return The persistable Athlete object
 	 */
-	private Athlete entityFromDTO(AthleteDTO athleteDTO) {
+	private Athlete entityFromDTO(AthleteRegisterDTO athleteRegisterDTO) {
 		Athlete athlete = new Athlete();
-		athlete.setLastName(athleteDTO.getLastName());
-		athlete.setFirstName(athleteDTO.getFirstName());
-		athlete.setDateBirth(athleteDTO.getDateBirth());
-		athlete.setEmail(athleteDTO.getEmail());
-		athlete.setPassword(athleteDTO.getPassword());
-		athlete.setBio(athleteDTO.getBio());
+		athlete.setLastName(athleteRegisterDTO.getLastName());
+		athlete.setFirstName(athleteRegisterDTO.getFirstName());
+		athlete.setDateBirth(athleteRegisterDTO.getDateBirth());
+		athlete.setEmail(athleteRegisterDTO.getEmail());
+		athlete.setPassword(athleteRegisterDTO.getPassword());
+		athlete.setBio(athleteRegisterDTO.getBio());
 		return athlete;
 	}
 

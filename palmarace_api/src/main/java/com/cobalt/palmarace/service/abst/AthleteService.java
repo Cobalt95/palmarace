@@ -3,7 +3,7 @@ package com.cobalt.palmarace.service.abst;
 import java.util.Optional;
 
 import com.cobalt.palmarace.model.Athlete;
-import com.cobalt.palmarace.model.dto.AthleteDTO;
+import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
 
 public interface AthleteService {
 
@@ -18,5 +18,5 @@ public interface AthleteService {
 	 * @param athleteDTO - Required data for athlete registration
 	 * @return The athlete object that has just been saved
 	 */
-	public Athlete save(AthleteDTO athleteDTO);
+	public Athlete registerAthlete(AthleteRegisterDTO athleteDTO);
 }
