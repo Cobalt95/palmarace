@@ -44,7 +44,7 @@ public class AthleteController {
 		Athlete athlete = athleteService.getByEmail(authentication.getName());
 
 		return ResponseEntity
-				.status(HttpStatus.FOUND)
+				.status(HttpStatus.OK)
 				.body("Hi " + athlete.getFirstName() + " " + athlete.getLastName() + ", welcome to Palmarace !");
 	}
 	

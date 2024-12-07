@@ -12,6 +12,7 @@ import com.cobalt.palmarace.model.Profile;
 import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
 import com.cobalt.palmarace.repository.AthleteDAO;
 import com.cobalt.palmarace.service.abst.AthleteService;
+import com.cobalt.palmarace.service.exc.AthleteAlreadyExistingException;
 import com.cobalt.palmarace.service.exc.AthleteNotFoundException;
 
 @Service
@@ -32,6 +33,11 @@ public class AthleteServiceImpl implements AthleteService {
 
 	@Override
 	public Athlete registerAthlete(AthleteRegisterDTO athleteRegisterDTO) {
+		
+		athleteDAO.findByEmail(athleteRegisterDTO.getEmail()).ifPresent(existingAthlete -> {
+			throw new AthleteAlreadyExistingException();
+		});
+		
 		Athlete athlete = entityFromDTO(athleteRegisterDTO);
 		
 		// Country assignment
