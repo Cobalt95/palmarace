@@ -1,0 +1,12 @@
+@use "/src/general-style/app-colors.scss" as app-colors;
+
+$primary-color: app-colors.$primary-color;
+
+.register-form-container {
+  border: 0.2rem solid $primary-color;
+  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+
+  button {
+    margin: 0 1rem 0 0;
+  }
+}

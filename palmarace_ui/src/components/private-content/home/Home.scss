@@ -1,0 +1,18 @@
+@use "/src/general-style/app-colors.scss" as app-colors;
+
+.home-container {
+    // as a flex item
+    flex-grow: 20;
+    background-color: app-colors.$primary-color;
+
+    h1 {
+        margin: 0.5em;
+    }
+
+    .event-preview-container {
+        // as a flex container
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}

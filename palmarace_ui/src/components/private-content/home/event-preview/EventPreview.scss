@@ -1,0 +1,6 @@
+@use "/src/general-style/app-colors.scss" as app-colors;
+
+h2 {
+        text-transform: capitalize;
+        color: app-colors.$secondary-color;
+}

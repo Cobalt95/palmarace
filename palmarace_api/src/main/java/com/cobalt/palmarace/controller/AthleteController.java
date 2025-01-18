@@ -36,7 +36,7 @@ public class AthleteController {
 	private UserDetailsServiceImpl userDetailsService;
 	
 	@GetMapping("/athlete")
-	public ResponseEntity<String> sayHi() {
+	public ResponseEntity<String> getAthleteName() {
 		// Retrieve user from current active session
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		// Retrieve the associated Athlete object
@@ -45,7 +45,7 @@ public class AthleteController {
 
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body("Hi " + athlete.getFirstName() + " " + athlete.getLastName() + ", welcome to Palmarace !");
+				.body(athlete.getFirstName() + " " + athlete.getLastName());
 	}
 	
 	@PostMapping("/register")

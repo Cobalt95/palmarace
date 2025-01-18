@@ -1,6 +1,6 @@
 import { BaseSyntheticEvent, useState } from "react";
 import "./LoginForm.scss";
-import { request, setAuthToken } from "../../helper/axios-helper";
+import { request, setAuthToken } from "../../../helper/axios-helper";
 
 type LoginFormProps = {
     title: string;

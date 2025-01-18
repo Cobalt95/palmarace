@@ -1,0 +1,29 @@
+@use "/src/general-style/app-colors.scss" as app-colors;
+
+.header-container {
+    // as a flex container
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // as a flex item
+    flex-grow: 1;
+    padding: 0.5em;
+
+    background-color: app-colors.$background-color;
+
+    div {
+        margin: 0 10px;
+        text-align: center;
+    }
+
+    .header-logo {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: x-large;
+        text-transform: uppercase;
+    }
+
+    .profile-header-container {
+        display: flex;
+        align-items: center;
+    }
+}

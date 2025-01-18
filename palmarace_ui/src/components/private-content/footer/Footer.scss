@@ -1,0 +1,30 @@
+@use "/src/general-style/app-colors.scss" as app-colors;
+
+.footer-container {
+    // as a flex container
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    // as a flex item
+    background-color: app-colors.$background-color;
+
+    div {
+
+        // as a flex container
+        display: flex;
+        flex-direction: column;
+
+        // as a flex item
+        text-align: left;
+        padding: 0 1.5em;
+
+        ul {
+            padding: 0;
+        }
+    }
+}
+
+ul {
+    list-style-type: none;
+}

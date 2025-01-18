@@ -1,0 +1,26 @@
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+  
+    input {
+      margin: 0 0 0.5rem 0;
+    }
+}
+
+.private-content-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.public-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.welcome-message {
+    text-align: center;
+}

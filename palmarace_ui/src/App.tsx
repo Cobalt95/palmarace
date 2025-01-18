@@ -1,51 +1,57 @@
 import { useState } from "react"
-import Home from "./components/home/Home"
-import LoginForm from "./components/login-form/LoginForm"
-import RegisterForm from "./components/register-form/RegisterForm"
+import Home from "./components/private-content/home/Home"
+import LoginForm from "./components/public-content/login-form/LoginForm"
+import RegisterForm from "./components/public-content/register-form/RegisterForm"
+import Header from "./components/private-content/header/Header";
+import "./App.scss";
+import Footer from "./components/private-content/footer/Footer";
 
 function App() {
 
   // state & data
 
-  const REGISTER_FORM:string = "RegisterForm";
-  const LOGIN_FORM:string = "LoginForm";
+  const REGISTER_FORM = "RegisterForm";
+  const LOGIN_FORM = "LoginForm";
 
-  const [publicComponentDisplayed, setPublicComponentDisplayed] = useState("RegisterForm");
+  const [publicComponentDisplayed, setPublicComponentDisplayed] = useState(REGISTER_FORM);
   const [privateContentDisplayed, setPrivateContentDisplayed] = useState(false);
+
   // handlers
-  const toggleRegisterLogin = (target:string) => {
+  const toggleRegisterLogin = (target:typeof REGISTER_FORM | typeof LOGIN_FORM) => {
     setPublicComponentDisplayed(target);
   }
   // render
   return (
     <div>
-      <h1>
-        Welcome to Palmarace !
-      </h1>
       { privateContentDisplayed ?
-        <>
-          <Home hidePrivateContent={() => setPrivateContentDisplayed(false)}/>
-        </> 
+        <div className="private-content-container">
+          <Header hidePrivateContent={() => setPrivateContentDisplayed(false)} />
+          <Home />
+          <Footer />
+        </div> 
       :
         <>
-          { publicComponentDisplayed === REGISTER_FORM && 
-            <RegisterForm 
-              title="Create an account" 
-              toggleLogin={() => toggleRegisterLogin(LOGIN_FORM)} 
-              displayPrivateContent={() => setPrivateContentDisplayed(true)}
-            /> 
-          }
-          { publicComponentDisplayed === LOGIN_FORM && 
-            <LoginForm 
-              title="Log in" 
-              toggleRegister={() => toggleRegisterLogin(REGISTER_FORM)} 
-              displayPrivateContent={() => setPrivateContentDisplayed(true)}
-            /> 
-          }
+          <h1 className="welcome-message">Welcome to Palmarace !</h1>
+          <div className="public-content-container">
+            { publicComponentDisplayed === REGISTER_FORM && 
+                <RegisterForm 
+                  title="Create an account" 
+                  toggleLogin={() => toggleRegisterLogin(LOGIN_FORM)} 
+                  displayPrivateContent={() => setPrivateContentDisplayed(true)}
+                /> 
+            }
+            { publicComponentDisplayed === LOGIN_FORM && 
+                <LoginForm 
+                  title="Log in" 
+                  toggleRegister={() => toggleRegisterLogin(REGISTER_FORM)} 
+                  displayPrivateContent={() => setPrivateContentDisplayed(true)}
+                /> 
+            }
+          </div>
         </>
       }
     </div>
   )
 }
 
-export default App
+export default App;

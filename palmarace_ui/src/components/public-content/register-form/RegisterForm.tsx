@@ -1,5 +1,6 @@
 import { BaseSyntheticEvent, useState } from "react";
-import { request, setAuthToken } from "../../helper/axios-helper";
+import { request, setAuthToken } from "../../../helper/axios-helper";
+import "./RegisterForm.scss"
 
 type RegisterFormProps = {
     title: string;
@@ -57,9 +58,9 @@ const RegisterForm = ( {title, toggleLogin, displayPrivateContent} : RegisterFor
                 <div className="input-container">
                     <label htmlFor="registerFormFirstName">First name</label><input id="registerFormFirstname" type="text" value={firstName} onChange={handlefirstNameUpdate}/>
                     <label htmlFor="registerFormLastName">Last name</label><input id="registerFormLastName" type="text" value={lastName} onChange={handleLastNameUpdate}/>
-                    <label htmlFor="registerFormDateBirth">Date of birth</label><input id="registerFormDateBirth" type="date" value={dateBirth} onChange={handleDateBirthUpdate}/>
                     <label htmlFor="registerFormEmail">Email</label><input id="registerFormEmail" type="email" value={email} onChange={handleEmailUpdate}/>
                     <label htmlFor="registerFormPassword">Password</label><input id="registerFormPassword" type="password" value={password} onChange={handlePasswordUpdate}/>
+                    <label htmlFor="registerFormDateBirth">Date of birth</label><input id="registerFormDateBirth" type="date" value={dateBirth} onChange={handleDateBirthUpdate}/>
                     {/* <label htmlFor="registerFormDateBirth">Country</label><input id="registerFormDateBirth" type="text" value={bio} onChange={handleDateBirthUpdate}/> */}
                 </div>
                 <button>Sign In</button>

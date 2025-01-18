@@ -1,37 +1,58 @@
-$background-color:#333;
-$link-color:#77db34;
+@use "/src/general-style/app-colors.scss" as app-colors;
+
+$background-color: app-colors.$background-color;
+$primary-color: app-colors.$primary-color;
+$secondary-color: app-colors.$secondary-color;
+$secondary-color-lighter: app-colors.$secondary-color-lighter;
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;
-    background-color: $background-color;
-    color: azure;
-  }
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  background-color: $background-color;
+  color: azure;
+  margin: 0;
+  padding: 0;
+}
   
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
 
-  a {
-    text-decoration: none;
-    color: $link-color;
-    position: relative;
-    cursor: default;
-  }
-  
-  a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background-color: $link-color;
-    transition: width 0.3s ease;
-  }
-  
-  a:hover::after {
-    width: 100%;
-  }
+a {
+  text-decoration: none;
+  color: $secondary-color;
+  position: relative;
+  cursor: pointer;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: $secondary-color-lighter;
+  transition: width 0.3s ease;
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+button {
+  background: none;
+  color: $secondary-color;
+  border: 0.1rem solid $secondary-color;
+  padding: 0.5em 1em;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: $secondary-color;
+  color: $background-color;
+}
