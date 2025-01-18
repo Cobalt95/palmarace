@@ -1,28 +1,31 @@
-import { setAuthToken } from "../../../../helper/axios-helper";
+import { Link } from "react-router-dom";
+import { logout } from "../../../../helper/axios-helper";
 import "./ProfileHeader.scss"
 
 type ProfileHeaderProps = {
     username: string,
     imgSrc: string,
-    hidePrivateContent: () => void;
 };
 
-const ProfileHeader = ({username, imgSrc, hidePrivateContent}:ProfileHeaderProps) => {
+const ProfileHeader = ({username, imgSrc}:ProfileHeaderProps) => {
 
     // state
     // handlers
     const handleLogout = () => {
-        setAuthToken("");
-        hidePrivateContent();
+        logout();
     }
     // render
     return (
         <>
-            <div>{username}</div>
-            <div className="header-profile-picture-container">
-                <img src={imgSrc}/>
-            </div>
-            <div><button onClick={() => handleLogout()}>Log out</button></div>
+            <Link to={"/profile"} className="no-after">
+                <div className="profile-header-container">
+                    <div className="profile-header-username-container">{username}</div>
+                    <div className="profile-header-picture-container">
+                        <img src={imgSrc}/>
+                    </div>
+                </div>
+            </Link>
+            <Link to="/login" className="no-after" onClick={() => handleLogout()}><button>Log out</button></Link>
         </>
     );
 }

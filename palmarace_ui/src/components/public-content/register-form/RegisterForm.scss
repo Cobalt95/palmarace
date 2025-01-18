@@ -3,10 +3,28 @@
 $primary-color: app-colors.$primary-color;
 
 .register-form-container {
-  border: 0.2rem solid $primary-color;
-  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
 
-  button {
-    margin: 0 1rem 0 0;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .register-form-sub-container {
+    height: 50vh;
+    width: 15vw;
+    min-width: 300px;
+    background-color: $primary-color;
+    padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+
+    .register-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+  
+    button {
+      margin: 0 1rem 0 0;
+    }
   }
 }

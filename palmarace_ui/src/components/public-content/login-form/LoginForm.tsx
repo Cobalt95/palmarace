@@ -1,18 +1,15 @@
 import { BaseSyntheticEvent, useState } from "react";
 import "./LoginForm.scss";
 import { request, setAuthToken } from "../../../helper/axios-helper";
+import { Link, useNavigate } from "react-router-dom";
 
-type LoginFormProps = {
-    title: string;
-    toggleRegister: () => void;
-    displayPrivateContent: () => void;
-}
-
-const LoginForm = ({title, toggleRegister, displayPrivateContent} : LoginFormProps) => {
+const LoginForm = () => {
 
     // state
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    
+    const navigate = useNavigate();
     // handlers
     const handleEmailUpdate = (event:BaseSyntheticEvent) => {
         event.preventDefault();
@@ -29,21 +26,28 @@ const LoginForm = ({title, toggleRegister, displayPrivateContent} : LoginFormPro
             password
         }).then((response) => {
             setAuthToken(response.headers["authorization"]);
-            displayPrivateContent();
+        }).then(() => {
+            navigate("/");
         })
     }
     // render
     return (
         <div className="login-form-container">
-            <form onSubmit={handleSubmit} className="login-form">
-                <h1>{title}</h1>
-                <div className="input-container">
-                    <label htmlFor="loginFormEmail">Email</label><input id="loginFormEmail" type="email" value={email} onChange={handleEmailUpdate}/>
-                    <label htmlFor="loginFormPassword">Password</label><input id="loginFormPassword" type="password" value={password} onChange={handlePasswordUpdate}/>
-                </div>
-                <button>Log In</button>
-                <a onClick={toggleRegister}>Create a new account</a>
-            </form>
+            <div className="login-form-sub-container">
+                <form onSubmit={handleSubmit} className="login-form">
+                    <div>
+                        <h1>Log in</h1>
+                        <div className="input-container">
+                            <label htmlFor="loginFormEmail">Email</label><input id="loginFormEmail" type="email" value={email} onChange={handleEmailUpdate}/>
+                            <label htmlFor="loginFormPassword">Password</label><input id="loginFormPassword" type="password" value={password} onChange={handlePasswordUpdate}/>
+                    </div>
+                    </div>
+                    <div>
+                        <button>Log In</button>
+                        <Link to="/register">Create a new account</Link>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

@@ -5,8 +5,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 5vh;
     // as a flex item
-    flex-grow: 1;
     padding: 0.5em;
 
     background-color: app-colors.$background-color;
@@ -20,10 +20,5 @@
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-size: x-large;
         text-transform: uppercase;
-    }
-
-    .profile-header-container {
-        display: flex;
-        align-items: center;
     }
 }

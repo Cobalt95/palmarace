@@ -1,3 +1,5 @@
+@use "/src/general-style/app-colors.scss" as app-colors;
+
 .input-container {
     display: flex;
     flex-direction: column;
@@ -12,6 +14,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-color: app-colors.$primary-color;
 }
 
 .public-content-container {

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { request } from "../../../helper/axios-helper";
 import "./Home.scss";
 import EventPreview from "./event-preview/EventPreview";
-import Profile from "./profile/Profile";
 
 const Home = () => {
     // state
@@ -21,7 +20,6 @@ const Home = () => {
                 <EventPreview type="last"/>
                 <EventPreview type="next"/>
             </div>
-            {/* <Profile /> */}
         </div>
     )
 }

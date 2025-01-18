@@ -1,18 +1,32 @@
 @use "/src/general-style/app-colors.scss" as app-colors;
 
-.header-profile-picture-container {
-    width: 45px;
-    height: 45px;
-    background-color: app-colors.$background-color;
+.profile-header-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
+    .profile-header-username-container {
+        padding: 0.5em;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: app-colors.$secondary-color;
+        }
+    }
+
+    .profile-header-picture-container {
+        width: 45px;
+        height: 45px;
+        background-color: app-colors.$background-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     }
 }

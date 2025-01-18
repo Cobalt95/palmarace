@@ -13,9 +13,17 @@ export const setAuthToken = (jwtToken:string) => {
   window.localStorage.setItem("jwt_token", jwtToken)
 }
 
+export const logout = () => {
+  window.localStorage.removeItem("jwt_token")
+}
+
+export const isAuthenticated = () => {
+  return getJwtToken();
+}
+
 export const request = (url:string, method:HttpMethods, data?:any) => {
   let headers = {};
-  if(getJwtToken() !== null && getJwtToken() !== "null") {
+  if(isAuthenticated()) {
     headers = {"Authorization": getJwtToken()};
   }
 

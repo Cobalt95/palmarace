@@ -20,26 +20,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-a {
+a:not(.no-after) {
   text-decoration: none;
   color: $secondary-color;
   position: relative;
   cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: $secondary-color-lighter;
+    transition: width 0.3s ease;
+  }
+  
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
 }
 
-a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 2px;
-  background-color: $secondary-color-lighter;
-  transition: width 0.3s ease;
-}
-
-a:hover::after {
-  width: 100%;
+a.no-after {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
 }
 
 button {
