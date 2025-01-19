@@ -46,7 +46,7 @@ a:not(.no-after) {
 
 a.no-after {
   text-decoration: none;
-  color: white;
+  color: $secondary-color;
   cursor: pointer;
 }
 

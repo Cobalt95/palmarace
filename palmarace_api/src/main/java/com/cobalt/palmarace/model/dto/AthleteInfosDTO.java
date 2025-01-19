@@ -1,17 +1,13 @@
 package com.cobalt.palmarace.model.dto;
 
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class AthleteRegisterDTO {
+public class AthleteInfosDTO {
 
-	private String lastName;
 	private String firstName;
-	private Date dateBirth;
-	private String email;
-	private String password;
+	private int age;
 	private String bio;
 	private String countryCode;
 }

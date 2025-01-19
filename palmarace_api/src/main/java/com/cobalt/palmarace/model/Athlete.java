@@ -1,6 +1,6 @@
 package com.cobalt.palmarace.model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;

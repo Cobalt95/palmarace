@@ -3,6 +3,7 @@ package com.cobalt.palmarace.service.abst;
 import java.util.Optional;
 
 import com.cobalt.palmarace.model.Athlete;
+import com.cobalt.palmarace.model.dto.AthleteInfosDTO;
 import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
 
 public interface AthleteService {
@@ -11,6 +12,7 @@ public interface AthleteService {
 	
 	public Athlete getByEmail(String email);
 	
+	public AthleteInfosDTO getAthleteInfos(String email);
 	
 	/**
 	 * Register a new athlete

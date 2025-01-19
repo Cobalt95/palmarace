@@ -1,12 +1,25 @@
-import { BaseSyntheticEvent, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { request, setAuthToken } from "../../../helper/axios-helper";
 import "./RegisterForm.scss"
 import { Link, useNavigate } from "react-router-dom";
 
-type RegisterFormProps = {
-    title: string;
-    toggleLogin: () => void;
-    displayPrivateContent: () => void;
+type CountryDataAPI = {
+    name: {
+        common: string,
+        official: string,
+        nativeName: {
+            eng: {
+                official: string,
+                common: string
+            }
+        }
+    },
+    cca2: string
+}
+
+type CountryData = {
+    cca2: string,
+    name: string
 }
 
 const RegisterForm = () => {
@@ -16,8 +29,23 @@ const RegisterForm = () => {
     const [dateBirth, setDateBirth] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [countryCode, setCountryCode] = useState("");
+
+    const [countryList, setCountryList] = useState<CountryData[]>([]);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch("https://restcountries.com/v3.1/all?fields=name,cca2")
+        .then(response => response.json()) 
+        .then(countriesDataAPI => {
+            const convertedCountryArray: CountryData[] = countriesDataAPI.map((country: CountryDataAPI) => ({name: country.name.common, cca2: country.cca2}));
+            convertedCountryArray.sort((countryA, countryB) => countryA.name > countryB.name ? 1 : -1);
+            setCountryCode(convertedCountryArray[0].cca2)
+            setCountryList(convertedCountryArray);
+    })
+    }, []);
+
     // handlers
     const handlefirstNameUpdate = (event:BaseSyntheticEvent) => {
         event.preventDefault();
@@ -39,6 +67,10 @@ const RegisterForm = () => {
         event.preventDefault();
         setPassword(event.target.value);
     }
+    const handleCountryUpdate = (event:BaseSyntheticEvent) => {
+        event.preventDefault();
+        setCountryCode(event.target.value);
+    }
     const handleSubmit = (event:BaseSyntheticEvent) => {
         event.preventDefault();
         request("/register", "POST", {
@@ -47,7 +79,7 @@ const RegisterForm = () => {
             dateBirth,
             email,
             password,
-            countryCode: "FR"
+            countryCode
         }).then((response) => {
             setAuthToken(response.headers["authorization"]);
         }).then(() => {
@@ -67,7 +99,10 @@ const RegisterForm = () => {
                             <label htmlFor="registerFormEmail">Email</label><input id="registerFormEmail" type="email" value={email} onChange={handleEmailUpdate}/>
                             <label htmlFor="registerFormPassword">Password</label><input id="registerFormPassword" type="password" value={password} onChange={handlePasswordUpdate}/>
                             <label htmlFor="registerFormDateBirth">Date of birth</label><input id="registerFormDateBirth" type="date" value={dateBirth} onChange={handleDateBirthUpdate}/>
-                            {/* <label htmlFor="registerFormDateBirth">Country</label><input id="registerFormDateBirth" type="text" value={bio} onChange={handleDateBirthUpdate}/> */}
+                            <label htmlFor="registerFormCountry">Country</label>
+                            <select id="registerFormCountry" value={countryCode} onChange={handleCountryUpdate}>
+                                {countryList.map(country => <option key={country.cca2} value={country.cca2}>{country.name}</option>)}
+                            </select>
                         </div>
                     </div>
                     <div>

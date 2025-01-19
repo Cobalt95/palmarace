@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { request } from "../../../helper/axios-helper";
+import { request } from "../../../../helper/axios-helper";
 import "./Home.scss";
 import EventPreview from "./event-preview/EventPreview";
 

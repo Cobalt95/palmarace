@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cobalt.palmarace.helper.AgeHelper;
 import com.cobalt.palmarace.model.Athlete;
 import com.cobalt.palmarace.model.Country;
 import com.cobalt.palmarace.model.Profile;
+import com.cobalt.palmarace.model.dto.AthleteInfosDTO;
 import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
 import com.cobalt.palmarace.repository.AthleteDAO;
 import com.cobalt.palmarace.service.abst.AthleteService;
@@ -71,6 +73,19 @@ public class AthleteServiceImpl implements AthleteService {
 		athlete.setPassword(athleteRegisterDTO.getPassword());
 		athlete.setBio(athleteRegisterDTO.getBio());
 		return athlete;
+	}
+
+	@Override
+	public AthleteInfosDTO getAthleteInfos(String email) {
+		Athlete athlete = getByEmail(email);
+		AthleteInfosDTO athleteInfosDto = new AthleteInfosDTO();
+		
+		athleteInfosDto.setFirstName(athlete.getFirstName());
+		athleteInfosDto.setCountryCode(athlete.getCountry().getCountryCode());
+		athleteInfosDto.setBio(athlete.getBio());
+		athleteInfosDto.setAge(AgeHelper.getAgeFromDateBirth(athlete.getDateBirth()));
+		
+		return athleteInfosDto;
 	}
 
 }

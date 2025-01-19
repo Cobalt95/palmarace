@@ -19,8 +19,8 @@
             gap: 1em;
     
             .profile-picture-container {
-                height: 10em;
-                width: 10em;
+                height: 12em;
+                width: 12em;
     
                 img {
                     width: 100%;
@@ -30,27 +30,16 @@
     
             .profile-infos-container {
                 width: 100%;
-    
-                ul {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding-inline-start: 0;
+                display: flex;
+                align-items: center;
+                gap: 0.8em;
+
+                img {
+                    margin-top: 6px;
+                }
+
+                h1 {
                     margin: 0;
-    
-                    li {
-    
-                        div {
-    
-                            h1 {
-                                margin: 0;
-                            }
-                        }
-    
-                        img {
-                            vertical-align: middle;
-                        }
-                    }
                 }
             }
         }
