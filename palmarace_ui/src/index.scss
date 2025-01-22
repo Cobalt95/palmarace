@@ -64,3 +64,8 @@ button:hover {
   background: $secondary-color;
   color: $background-color;
 }
+
+textarea {
+  resize: vertical;
+  max-height: 30vh;
+}

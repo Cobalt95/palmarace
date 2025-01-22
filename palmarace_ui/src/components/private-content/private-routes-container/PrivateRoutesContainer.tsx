@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import { isAuthenticated } from "../../../helper/axios-helper"
 import { useEffect } from "react";
 import Footer from "../footer/Footer";
@@ -9,11 +9,12 @@ const PrivateRoutesContainer = () => {
     
     // state & data
     const navigate = useNavigate();
+    const location = useLocation();
     useEffect(() => {
         if(!isAuthenticated()) {
             navigate("/login")
         }
-    }, [])
+    }, [location])
     // handlers
     // render
     return (

@@ -1,0 +1,5 @@
+@use "/src/general-style/app-colors.scss" as app-colors;
+
+.spinning-circle {
+    stroke: app-colors.$secondary-color;
+}

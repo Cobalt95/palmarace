@@ -25,7 +25,7 @@ public class JwtHelper {
 				.claim("username", username)
 				.claim("authorities", authorities)
 				.issuedAt(new Date())
-				.expiration(new Date((new Date()).getTime() + 3000000))
+				.expiration(new Date((new Date()).getTime() + 8000000))
 				.signWith(hashedSecretKey)
 				.compact();
 		

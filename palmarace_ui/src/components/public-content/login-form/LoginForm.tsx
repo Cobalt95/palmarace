@@ -3,30 +3,36 @@ import "./LoginForm.scss";
 import { request, setAuthToken } from "../../../helper/axios-helper";
 import { Link, useNavigate } from "react-router-dom";
 
+type LoginFormFields = {
+    email: string,
+    password: string
+}
+
 const LoginForm = () => {
 
-    // state
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    
+    // state & data
+    const [loginFormFields, setLoginFormFields] = useState<LoginFormFields>({
+        email: "",
+        password: ""
+    });
+
+    const {email, password} = loginFormFields;
     const navigate = useNavigate();
     // handlers
-    const handleEmailUpdate = (event:BaseSyntheticEvent) => {
-        event.preventDefault();
-        setEmail(event.currentTarget.value);
-    }
-    const handlePasswordUpdate = (event:BaseSyntheticEvent) => {
-        event.preventDefault();
-        setPassword(event.currentTarget.value);
+    const handleFieldUpdate = (e:BaseSyntheticEvent) => {
+        e.preventDefault();
+        setLoginFormFields({
+            ...loginFormFields,
+            [e.target.name]: e.target.value
+        });
     }
     const handleSubmit = (event:BaseSyntheticEvent) => {
         event.preventDefault();
-        request("/login", "POST", {
-            email,
-            password
-        }).then((response) => {
+        request("/login", "POST", loginFormFields)
+        .then((response) => {
             setAuthToken(response.headers["authorization"]);
-        }).then(() => {
+        })
+        .then(() => {
             navigate("/");
         })
     }
@@ -38,8 +44,8 @@ const LoginForm = () => {
                     <div>
                         <h1>Log in</h1>
                         <div className="input-container">
-                            <label htmlFor="loginFormEmail">Email</label><input id="loginFormEmail" type="email" value={email} onChange={handleEmailUpdate}/>
-                            <label htmlFor="loginFormPassword">Password</label><input id="loginFormPassword" type="password" value={password} onChange={handlePasswordUpdate}/>
+                            <label htmlFor="loginFormEmail">Email</label><input name="email" id="loginFormEmail" type="email" value={email} onChange={handleFieldUpdate}/>
+                            <label htmlFor="loginFormPassword">Password</label><input name="password" id="loginFormPassword" type="password" value={password} onChange={handleFieldUpdate}/>
                     </div>
                     </div>
                     <div>

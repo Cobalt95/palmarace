@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 type HttpMethods = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -17,8 +18,30 @@ export const logout = () => {
   window.localStorage.removeItem("jwt_token")
 }
 
+const isTokenExpired = (jwtToken:string) => {
+  try {
+    const decodedJwtToken = jwtDecode(jwtToken);
+    // exp field present
+    if (decodedJwtToken.exp) {
+      // exp value in the past
+      if (decodedJwtToken.exp * 1000 < Date.now()) {
+        return true;
+      }
+    } 
+  } catch (error) {
+    console.log("Could not decode jwtToken");
+    return true;
+  }
+
+  return false;
+}
+
 export const isAuthenticated = () => {
-  return getJwtToken();
+  const jwtToken = getJwtToken();
+  if (!jwtToken) {
+    return false;
+  }
+  return !isTokenExpired(jwtToken);
 }
 
 export const request = (url:string, method:HttpMethods, data?:any) => {
