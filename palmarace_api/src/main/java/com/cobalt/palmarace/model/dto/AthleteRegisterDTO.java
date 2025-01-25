@@ -1,6 +1,6 @@
 package com.cobalt.palmarace.model.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +9,7 @@ public class AthleteRegisterDTO {
 
 	private String lastName;
 	private String firstName;
-	private Date dateBirth;
+	private LocalDate dateBirth;
 	private String email;
 	private String password;
 	private String bio;

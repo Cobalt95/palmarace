@@ -7,6 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,14 +21,13 @@ public class Kudo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int kudoId;
-	private boolean eventCompleted;
 	private LocalDateTime creationDate;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "athlete_event_id")
 	private AthleteEvent athleteEvent;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "athlete_id")
 	private Athlete author;
 	

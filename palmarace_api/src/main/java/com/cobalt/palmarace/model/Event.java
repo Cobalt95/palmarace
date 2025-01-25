@@ -1,13 +1,18 @@
 package com.cobalt.palmarace.model;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +25,11 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int eventId;
 	private String name;
-	private Date date;
-	private float distance;
+	private LocalDate date;
+	@Column(precision = 7, scale = 3)
+	private BigDecimal distance;
+	private int totalParticipants;
+	private int totalFinishers;
 	
 	@ManyToOne
 	@JoinColumn(name = "place_id")
@@ -41,5 +49,20 @@ public class Event {
 	
 	@ManyToOne
 	@JoinColumn(name = "parent_event_id")
-	private Event event;
+	private Event parentEvent;
+	
+	@OneToMany(
+			mappedBy = "parentEvent",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	private List<Event> childEvents;
+	
+	@OneToMany(
+			mappedBy = "event",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	private List<AthleteEvent> athletes;
+	
 }

@@ -1,5 +1,8 @@
 package com.cobalt.palmarace.model;
 
+import java.math.BigDecimal;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +20,12 @@ public class GpxTrackPoint {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int gpxTrkptId;
 	private int position;
-	private float lat;
-	private float lon;
-	private float ele;
+	@Column(precision = 8, scale = 6)
+	private BigDecimal lat;
+	@Column(precision = 8, scale = 6)
+	private BigDecimal lon;
+	@Column(precision = 8, scale = 6)
+	private BigDecimal ele;
 	
 	@ManyToOne
 	@JoinColumn(name = "gpx_trk_id")

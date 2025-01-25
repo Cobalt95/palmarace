@@ -1,6 +1,7 @@
 package com.cobalt.palmarace.service.impl;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class AthleteServiceImpl implements AthleteService {
 		
 		// TODO : Assign profile picture
 		
-		athlete.setCreationDate(new Timestamp(System.currentTimeMillis()));
+		athlete.setCreationDate(LocalDateTime.now());
 		return athleteDAO.save(athlete);
 	}
 	

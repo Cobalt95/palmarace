@@ -14,7 +14,8 @@ import lombok.Setter;
 public class Image {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// No @GeneratedValues as imageIds will be provided by MinIO, or S3
+	// (Object storage strategy will be decided later)
 	private int imageId;
 	
 	@ManyToOne

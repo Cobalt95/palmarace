@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,11 +22,11 @@ public class Comment {
 	private String content;
 	private LocalDateTime creationDate;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "athlete_event_id")
 	private AthleteEvent athleteEvent;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "athlete_id")
 	private Athlete author;
 }
