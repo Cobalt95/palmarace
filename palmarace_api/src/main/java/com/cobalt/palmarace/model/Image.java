@@ -16,7 +16,7 @@ public class Image {
 	@Id
 	// No @GeneratedValues as imageIds will be provided by MinIO, or S3
 	// (Object storage strategy will be decided later)
-	private int imageId;
+	private Integer imageId;
 	
 	@ManyToOne
 	@JoinColumn(name = "image_type_code")

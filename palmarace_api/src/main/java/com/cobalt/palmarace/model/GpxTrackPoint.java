@@ -18,7 +18,7 @@ public class GpxTrackPoint {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int gpxTrkptId;
+	private Integer gpxTrkptId;
 	private int position;
 	@Column(precision = 8, scale = 6)
 	private BigDecimal lat;

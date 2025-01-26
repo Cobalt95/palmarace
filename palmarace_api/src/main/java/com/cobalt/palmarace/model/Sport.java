@@ -10,6 +10,6 @@ import lombok.Setter;
 public class Sport {
 
 	@Id
-	private String sport_code;
+	private String sportCode;
 	private String name;
 }

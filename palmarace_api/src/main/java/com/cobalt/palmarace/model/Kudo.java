@@ -20,7 +20,7 @@ public class Kudo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int kudoId;
+	private Integer kudoId;
 	private LocalDateTime creationDate;
 	
 	@ManyToOne

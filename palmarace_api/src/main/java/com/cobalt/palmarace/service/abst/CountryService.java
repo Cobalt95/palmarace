@@ -4,5 +4,5 @@ import com.cobalt.palmarace.model.Country;
 
 public interface CountryService {
 
-	public Country getById(String countryCode);
+	Country getById(String countryCode);
 }

@@ -1,6 +1,5 @@
 package com.cobalt.palmarace.service.impl;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -11,8 +10,8 @@ import com.cobalt.palmarace.helper.AgeHelper;
 import com.cobalt.palmarace.model.Athlete;
 import com.cobalt.palmarace.model.Country;
 import com.cobalt.palmarace.model.Profile;
-import com.cobalt.palmarace.model.dto.AthleteInfosDTO;
-import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
+import com.cobalt.palmarace.model.dto.athlete.AthleteCreationDTO;
+import com.cobalt.palmarace.model.dto.athlete.AthleteViewDTO;
 import com.cobalt.palmarace.repository.AthleteDAO;
 import com.cobalt.palmarace.service.abst.AthleteService;
 import com.cobalt.palmarace.service.exc.AthleteAlreadyExistingException;
@@ -35,17 +34,17 @@ public class AthleteServiceImpl implements AthleteService {
 	}
 
 	@Override
-	public Athlete registerAthlete(AthleteRegisterDTO athleteRegisterDTO) {
+	public Athlete registerAthlete(AthleteCreationDTO athleteCreationDTO) {
 		
-		athleteDAO.findByEmail(athleteRegisterDTO.getEmail()).ifPresent(existingAthlete -> {
+		athleteDAO.findByEmail(athleteCreationDTO.getEmail()).ifPresent(existingAthlete -> {
 			throw new AthleteAlreadyExistingException();
 		});
 		
-		Athlete athlete = entityFromDTO(athleteRegisterDTO);
+		Athlete athlete = entityFromDTO(athleteCreationDTO);
 		
 		// Country assignment
 		Country country = new Country();
-		country.setCountryCode(athleteRegisterDTO.getCountryCode());
+		country.setCountryCode(athleteCreationDTO.getCountryCode());
 		athlete.setCountry(country);
 		
 		// Profile assignment
@@ -65,21 +64,21 @@ public class AthleteServiceImpl implements AthleteService {
 	 * @param athleteRegisterDTO - The DTO to be converted
 	 * @return The persistable Athlete object
 	 */
-	private Athlete entityFromDTO(AthleteRegisterDTO athleteRegisterDTO) {
+	private Athlete entityFromDTO(AthleteCreationDTO athleteCreationDTO) {
 		Athlete athlete = new Athlete();
-		athlete.setLastName(athleteRegisterDTO.getLastName());
-		athlete.setFirstName(athleteRegisterDTO.getFirstName());
-		athlete.setDateBirth(athleteRegisterDTO.getDateBirth());
-		athlete.setEmail(athleteRegisterDTO.getEmail());
-		athlete.setPassword(athleteRegisterDTO.getPassword());
-		athlete.setBio(athleteRegisterDTO.getBio());
+		athlete.setLastName(athleteCreationDTO.getLastName());
+		athlete.setFirstName(athleteCreationDTO.getFirstName());
+		athlete.setDateBirth(athleteCreationDTO.getDateBirth());
+		athlete.setEmail(athleteCreationDTO.getEmail());
+		athlete.setPassword(athleteCreationDTO.getPassword());
+		athlete.setBio(athleteCreationDTO.getBio());
 		return athlete;
 	}
 
 	@Override
-	public AthleteInfosDTO getAthleteInfos(String email) {
+	public AthleteViewDTO getAthleteInfos(String email) {
 		Athlete athlete = getByEmail(email);
-		AthleteInfosDTO athleteInfosDto = new AthleteInfosDTO();
+		AthleteViewDTO athleteInfosDto = new AthleteViewDTO();
 		
 		athleteInfosDto.setFirstName(athlete.getFirstName());
 		athleteInfosDto.setCountryCode(athlete.getCountry().getCountryCode());

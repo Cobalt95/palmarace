@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.cobalt.palmarace.helper.JwtHelper;
 import com.cobalt.palmarace.model.Athlete;
-import com.cobalt.palmarace.model.dto.AthleteLoginDTO;
+import com.cobalt.palmarace.model.dto.athlete.AthleteLoginDTO;
 import com.cobalt.palmarace.repository.AthleteDAO;
 
 @Service

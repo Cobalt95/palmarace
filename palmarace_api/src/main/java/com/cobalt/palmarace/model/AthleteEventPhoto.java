@@ -20,7 +20,7 @@ public class AthleteEventPhoto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int athleteEventPhotoId;
+	private Integer athleteEventPhotoId;
 	
 	@OneToOne
 	@JoinColumn(name = "image_id")

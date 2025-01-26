@@ -17,7 +17,7 @@ public class GpxTrack {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int gpxTrkId;
+	private Integer gpxTrkId;
 	private String name;
 	private String gpxVersion;
 	private String creator;

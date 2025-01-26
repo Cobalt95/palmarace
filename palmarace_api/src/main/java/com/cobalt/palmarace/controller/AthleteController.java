@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cobalt.palmarace.constant.PalmaraceConstants;
 import com.cobalt.palmarace.model.Athlete;
-import com.cobalt.palmarace.model.dto.AthleteInfosDTO;
-import com.cobalt.palmarace.model.dto.AthleteLoginDTO;
-import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
+import com.cobalt.palmarace.model.dto.athlete.AthleteCreationDTO;
+import com.cobalt.palmarace.model.dto.athlete.AthleteViewDTO;
+import com.cobalt.palmarace.model.dto.athlete.AthleteLoginDTO;
 import com.cobalt.palmarace.service.abst.AthleteService;
 import com.cobalt.palmarace.service.impl.UserDetailsServiceImpl;
 
@@ -50,12 +50,12 @@ public class AthleteController {
 	}
 	
 	@GetMapping("/athleteInfos")
-	public ResponseEntity<AthleteInfosDTO> getAthleteInfos() {
+	public ResponseEntity<AthleteViewDTO> getAthleteInfos() {
 		// Retrieve user from current active session
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		// Retrieve the associated Athlete object
 		// If not found, the exception is handled by com.cobalt.palmarace.config.GlobalExceptionHandler
-		AthleteInfosDTO athleteInfosDto = athleteService.getAthleteInfos(authentication.getName());
+		AthleteViewDTO athleteInfosDto = athleteService.getAthleteInfos(authentication.getName());
 
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -63,11 +63,11 @@ public class AthleteController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<String> registerAthlete(@RequestBody AthleteRegisterDTO athleteRegisterDTO) {
+	public ResponseEntity<String> registerAthlete(@RequestBody AthleteCreationDTO athleteCreationDTO) {
 		try {
-			String hashPassword = passwordEncoder.encode(athleteRegisterDTO.getPassword());
-			athleteRegisterDTO.setPassword(hashPassword);
-			Athlete registeredAthlete = athleteService.registerAthlete(athleteRegisterDTO);
+			String hashPassword = passwordEncoder.encode(athleteCreationDTO.getPassword());
+			athleteCreationDTO.setPassword(hashPassword);
+			Athlete registeredAthlete = athleteService.registerAthlete(athleteCreationDTO);
 			
 			if(registeredAthlete.getAthleteId() > 0) {
 				

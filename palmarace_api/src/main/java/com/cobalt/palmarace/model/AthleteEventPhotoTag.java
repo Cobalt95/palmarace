@@ -15,7 +15,7 @@ public class AthleteEventPhotoTag {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int athleteEventPhotoTagId;
+	private Integer athleteEventPhotoTagId;
 	
 	@OneToOne
 	@JoinColumn(name = "tag_code")

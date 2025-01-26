@@ -15,7 +15,7 @@ public class Place {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int placeId;
+	private Integer placeId;
 	private String region;
 	private String city;
 	

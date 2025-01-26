@@ -23,9 +23,9 @@ public class Event {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int eventId;
+	private Integer eventId;
 	private String name;
-	private LocalDate date;
+	private LocalDate eventDate;
 	@Column(precision = 7, scale = 3)
 	private BigDecimal distance;
 	private int totalParticipants;

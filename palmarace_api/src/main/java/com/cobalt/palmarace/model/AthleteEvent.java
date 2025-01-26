@@ -20,7 +20,7 @@ public class AthleteEvent {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int athleteEventId;
+	private Integer athleteEventId;
 	private boolean finisher;
 	private LocalTime finishTime;
 	private int overallRank;

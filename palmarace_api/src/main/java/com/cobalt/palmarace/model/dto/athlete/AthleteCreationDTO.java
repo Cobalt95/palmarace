@@ -1,11 +1,11 @@
-package com.cobalt.palmarace.model.dto;
+package com.cobalt.palmarace.model.dto.athlete;
 
 import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class AthleteRegisterDTO {
+public class AthleteCreationDTO {
 
 	private String lastName;
 	private String firstName;

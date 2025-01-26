@@ -26,7 +26,7 @@ public class Connection {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int connectionId;
+	private Integer connectionId;
 	private LocalDateTime creationDate;
 	
 	@ManyToOne

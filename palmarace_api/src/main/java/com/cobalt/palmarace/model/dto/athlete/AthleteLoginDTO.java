@@ -1,4 +1,4 @@
-package com.cobalt.palmarace.model.dto;
+package com.cobalt.palmarace.model.dto.athlete;
 
 import lombok.Getter;
 import lombok.Setter;

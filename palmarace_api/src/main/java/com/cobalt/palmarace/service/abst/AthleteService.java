@@ -3,22 +3,22 @@ package com.cobalt.palmarace.service.abst;
 import java.util.Optional;
 
 import com.cobalt.palmarace.model.Athlete;
-import com.cobalt.palmarace.model.dto.AthleteInfosDTO;
-import com.cobalt.palmarace.model.dto.AthleteRegisterDTO;
+import com.cobalt.palmarace.model.dto.athlete.AthleteCreationDTO;
+import com.cobalt.palmarace.model.dto.athlete.AthleteViewDTO;
 
 public interface AthleteService {
 
-	public Optional<Athlete> getById(int athleteId);
+	Optional<Athlete> getById(int athleteId);
 	
-	public Athlete getByEmail(String email);
+	Athlete getByEmail(String email);
 	
-	public AthleteInfosDTO getAthleteInfos(String email);
+	AthleteViewDTO getAthleteInfos(String email);
 	
 	/**
 	 * Register a new athlete
 	 * 
-	 * @param athleteDTO - Required data for athlete registration
+	 * @param athleteCreationDTO - Required data for athlete registration
 	 * @return The athlete object that has just been saved
 	 */
-	public Athlete registerAthlete(AthleteRegisterDTO athleteDTO);
+	Athlete registerAthlete(AthleteCreationDTO athleteCreationDTO);
 }
