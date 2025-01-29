@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 import com.cobalt.palmarace.model.Place;
 import com.cobalt.palmarace.model.dto.place.PlaceCreationDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface PlaceMapper {
 
 	PlaceMapper INSTANCE = Mappers.getMapper(PlaceMapper.class);

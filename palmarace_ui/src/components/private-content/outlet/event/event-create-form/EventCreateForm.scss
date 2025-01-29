@@ -1,0 +1,16 @@
+@use "/src/general-style/app-colors.scss" as app-colors;
+
+.event-create-form-container {
+    height: 75vh;
+    background-color: app-colors.$primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    form {
+        height: 50vh;
+        width: 15vw;
+        min-width: 300px;
+        padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+    }
+}

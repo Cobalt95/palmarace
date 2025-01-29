@@ -44,7 +44,7 @@ public class Event {
 	private GpxTrack gpxTrack;
 	
 	@OneToOne
-	@JoinColumn(name = "image_id")
+	@JoinColumn(name = "logo")
 	private Image logo;
 	
 	@ManyToOne

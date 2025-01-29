@@ -3,6 +3,7 @@ import Profile from "../components/private-content/outlet/profile/Profile";
 import RegisterForm from "../components/public-content/register-form/RegisterForm";
 import LoginForm from "../components/public-content/login-form/LoginForm";
 import PrivateRoutesContainer from "../components/private-content/private-routes-container/PrivateRoutesContainer";
+import EventCreateForm from "../components/private-content/outlet/event/event-create-form/EventCreateForm";
 
 const publicRoutes = [
     {
@@ -23,6 +24,10 @@ const privateRoutes = [
     {
         path: "/profile",
         element: <Profile />
+    },
+    {
+        path: "/event-create",
+        element: <EventCreateForm />
     }
 ];
 

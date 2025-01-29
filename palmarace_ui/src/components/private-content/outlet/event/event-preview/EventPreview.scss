@@ -4,3 +4,9 @@ h2 {
         text-transform: capitalize;
         color: app-colors.$secondary-color;
 }
+
+button.new-event {
+        width: 250px;
+        height: 250px;
+        font-size: 400%;
+}
