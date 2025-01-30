@@ -47,4 +47,12 @@ public class AthleteEvent {
 			orphanRemoval = true
 	)
 	private List<Comment> comments;
+	
+	// Constructors
+	
+	public AthleteEvent(Athlete athlete) {
+		setAthlete(athlete);
+	}
+	
+	public AthleteEvent() {}
 }

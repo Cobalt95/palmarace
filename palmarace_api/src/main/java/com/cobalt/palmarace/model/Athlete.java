@@ -49,7 +49,7 @@ public class Athlete {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
-	private List<AthleteEvent> events;
+	private List<AthleteEvent> athleteEvents;
 	
 	@OneToMany(
 			mappedBy = "athleteFollower",

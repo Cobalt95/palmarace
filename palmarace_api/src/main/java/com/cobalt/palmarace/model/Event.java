@@ -63,6 +63,20 @@ public class Event {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
-	private List<AthleteEvent> athletes;
+	private List<AthleteEvent> athleteEvents;
+	
+	/**
+	 * Adds a new athleteEvent link between this event and the provided athlete
+	 * @param athlete
+	 */
+	public void addAthleteEvent(Athlete athlete) {
+		AthleteEvent athleteEvent = new AthleteEvent(athlete);
+		athleteEvent.setEvent(this);
+		if(athleteEvents == null || athleteEvents.isEmpty()) {
+			athleteEvents = List.of(athleteEvent);
+		} else {
+			athleteEvents.add(athleteEvent);
+		}
+	}
 	
 }
